@@ -7,12 +7,14 @@ from threading import *  #to create thread
 #total size container
 file_size=0
 
+#progressbar check function
 def progress(stream, chunk, file_handle, remaining=None):
     #get the percentage of file
     file_downloaded=(file_size - file_handle)
     per=(file_downloaded / file_size) * 100
     dBtn.config(text="{:00.0f} % downloaded".format(per))
 
+#function to download the youtube file
 def startdownload():
     global file_size
     try:
@@ -48,18 +50,19 @@ def startdownload():
         print(e)
         print("error")
 
+#creating a thread function
 def startdownloadthread():
     #create thread
     thread=Thread(target=startdownload)
     thread.start()
 
-#creating GUI building
+####creating GUI building
 
 #dialogue windw
 mainwindow=Tk()  #main window of Tk class
 mainwindow.title("My Youtube Downloader")  #setting dialog title
 mainwindow.iconbitmap("img.ico")  #set the icon
-mainwindow.geometry("400x500")  #seeting the height and width
+mainwindow.geometry("400x500")  #setting the height and width
 file=PhotoImage(file="img.png")
 headerIcon=Label(mainwindow,image=file,width=120, height=100)
 headerIcon.pack(side=TOP,ipadx=100,ipady=100)
@@ -75,6 +78,8 @@ dBtn.pack(side=TOP, pady=20)
 #title name
 vediotitle=Label(mainwindow,text="vedio title",font=("verdana",10))
 vediotitle.pack(side=TOP,pady=5)
-mainwindow.mainloop()  #dialogue window visible
+
+#dialogue window visible
+mainwindow.mainloop()
 
 
